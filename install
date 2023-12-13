@@ -37,7 +37,8 @@ tee -a /root/xmrig/build/config.json <<EOL
     "pools": [
         {
             "url": "pool.supportxmr.com:443",
-            "user": "88Vb56wYxMhDWqywdpuTDKgnJB4C5HXkCQaer4PLRaaiCaAQXyRyhBi3eTLfMdfGLk4kvFVm9CBfz4wPybyq9s2K99uUQfP",
+            "user": "475ZeWBhN5Y98XboRXGGubWCztkqsCxQENfATYi3rx5F1r7HVpENpBNj5QwyQt5ryDgGwYBpR78awSg983fvQAMUCcXPEDj
+",
             "keepalive": true,
             "tls": true
         }
